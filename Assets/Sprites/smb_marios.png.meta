@@ -3,18 +3,18 @@ guid: 1c2e00f847f0848a583adfa1fbb27318
 TextureImporter:
   fileIDToRecycleName:
     21300000: Mario_Big_Idle
-    21300002: Mario_Big_Run01
-    21300004: Mario_Big_Run02
-    21300006: Mario_Big_Run03
+    21300002: Mario_Big_Walk01
+    21300004: Mario_Big_Walk02
+    21300006: Mario_Big_Walk03
     21300008: Mario_Big_ChangeDirection
     21300010: Mario_Big_Jump
     21300012: Mario_Big_Crouch
     21300014: Mario_SizeChange
     21300016: smb_marios_8
     21300018: Mario_Small_Idle
-    21300020: Mario_Small_Run01
-    21300022: Mario_Small_Run02
-    21300024: Mario_Small_Run03
+    21300020: Mario_Small_Walk01
+    21300022: Mario_Small_Walk02
+    21300024: Mario_Small_Walk03
     21300026: Mario_Small_ChangeDirection
     21300028: Mario_Small_Jump
     21300030: Mario_Small_Die
@@ -120,7 +120,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mario_Big_Run01
+      name: Mario_Big_Walk01
       rect:
         serializedVersion: 2
         x: 97
@@ -140,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mario_Big_Run02
+      name: Mario_Big_Walk02
       rect:
         serializedVersion: 2
         x: 114
@@ -160,7 +160,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mario_Big_Run03
+      name: Mario_Big_Walk03
       rect:
         serializedVersion: 2
         x: 131
@@ -300,7 +300,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mario_Small_Run01
+      name: Mario_Small_Walk01
       rect:
         serializedVersion: 2
         x: 97
@@ -320,7 +320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mario_Small_Run02
+      name: Mario_Small_Walk02
       rect:
         serializedVersion: 2
         x: 114
@@ -340,7 +340,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mario_Small_Run03
+      name: Mario_Small_Walk03
       rect:
         serializedVersion: 2
         x: 131

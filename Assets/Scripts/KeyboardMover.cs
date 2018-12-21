@@ -28,10 +28,19 @@ public class KeyboardMover : MonoBehaviour
     public MoveAxis Horizontal = new MoveAxis(KeyCode.D, KeyCode.A);
     public MoveAxis Vertical = new MoveAxis(KeyCode.W, KeyCode.S);
 
+    Animator anim;
+
+    private void Start()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
+
     private void Update()
     {
         Vector3 moveNormal = new Vector3(Horizontal, Vertical, 0.0f).normalized;
 
+        anim.SetFloat("MoveSpeed", Math.Abs(Horizontal) * 2);
+        anim.SetFloat("InAir", Math.Abs(Vertical));
         transform.position += moveNormal * Time.deltaTime * MoveRate.Value;
     }
 }
