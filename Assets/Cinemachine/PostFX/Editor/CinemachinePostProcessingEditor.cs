@@ -1,3 +1,5 @@
+#if UNITY_POST_PROCESSING_STACK_V2
+
 // NOTE: If you are getting errors of the sort that say something like:
 //     "The type or namespace name `PostProcessing' does not exist in the namespace"
 // it is because the PostProcessing v2 module has been removed from your project.
@@ -41,14 +43,11 @@ namespace Cinemachine.PostFX.Editor
 
         void OnDisable()
         {
-            if (m_EffectList != null)
-                m_EffectList.Clear();
+            m_EffectList.Clear();
         }
 
         void RefreshEffectListEditor(PostProcessProfile asset)
         {
-            if (m_EffectList == null)
-                m_EffectList = new EffectListEditor(this);
             m_EffectList.Clear();
             if (asset != null)
                 m_EffectList.Init(asset, new SerializedObject(asset));
@@ -57,29 +56,6 @@ namespace Cinemachine.PostFX.Editor
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-
-            if (m_FocusTracksTarget.boolValue)
-            {
-                bool valid = false;
-                DepthOfField dof;
-                if (Target.m_Profile != null && Target.m_Profile.TryGetSettings(out dof))
-                    valid = dof.enabled && dof.active && dof.focusDistance.overrideState;
-                if (!valid)
-                    EditorGUILayout.HelpBox(
-                        "Focus Tracking requires an active DepthOfField/FocusDistance effect in the profile", 
-                        MessageType.Warning);
-                else
-                {
-                    if (!Target.VirtualCamera.State.HasLookAt)
-                        EditorGUILayout.HelpBox(
-                            "Focus Offset is relative to the Camera position", 
-                            MessageType.Info);
-                     else
-                        EditorGUILayout.HelpBox(
-                            "Focus Offset is relative to the Target position", 
-                            MessageType.Info);
-                }
-            }
 
             var rect = GUILayoutUtility.GetRect(1, EditorGUIUtility.singleLineHeight); rect.y += 2;
             float checkboxWidth = rect.height + 5;
@@ -94,6 +70,16 @@ namespace Cinemachine.PostFX.Editor
                 EditorGUIUtility.labelWidth = textDimensions.x;
                 EditorGUI.PropertyField(rect, m_FocusOffset, offsetText);
                 EditorGUIUtility.labelWidth = oldWidth;
+
+                bool valid = false;
+                DepthOfField dof;
+                if (Target.m_Profile != null && Target.m_Profile.TryGetSettings<DepthOfField>(out dof))
+                    valid = dof.enabled && dof.active && dof.focusDistance.overrideState 
+                        && Target.VirtualCamera.LookAt != null;
+                if (!valid)
+                    EditorGUILayout.HelpBox(
+                        "Focus Tracking requires a LookAt target on the Virtual Camera, and an active DepthOfField/FocusDistance effect in the profile", 
+                        MessageType.Warning);
             }
 
             DrawProfileInspectorGUI();
@@ -175,7 +161,7 @@ namespace Cinemachine.PostFX.Editor
 
             if (m_Profile.objectReferenceValue == null)
             {
-                if (assetHasChanged && m_EffectList != null)
+                if (assetHasChanged)
                     m_EffectList.Clear(); // Asset wasn't null before, do some cleanup
 
                 EditorGUILayout.HelpBox(
@@ -186,9 +172,9 @@ namespace Cinemachine.PostFX.Editor
             {
                 if (assetHasChanged)
                     RefreshEffectListEditor((PostProcessProfile)m_Profile.objectReferenceValue);
-                if (m_EffectList != null)
-                    m_EffectList.OnGUI();
+                m_EffectList.OnGUI();
             }
         }
     }
 } 
+#endif

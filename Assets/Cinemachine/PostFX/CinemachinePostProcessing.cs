@@ -1,11 +1,13 @@
-﻿// NOTE: If you are getting errors of the sort that say something like:
+﻿#if UNITY_POST_PROCESSING_STACK_V2
+
+// NOTE: If you are getting errors of the sort that say something like:
 //     "The type or namespace name `PostProcessing' does not exist in the namespace"
-// it is because the Post Processing Stack V2 module has not been installed in your project.
+// it is because the PostProcessing v2 module has been removed from your project.
 //
 // To make the errors go away, you can either:
 //   1 - Download PostProcessing V2 and install it into your project
 // or
-//   2 - Delete the CinemachinePostProcessingV2 folder from your project
+//   2 - Go into PlayerSettings/OtherSettings and remove the Scripting Define for UNITY_POST_PROCESSING_STACK_V2
 //
 
 using System.Collections.Generic;
@@ -25,7 +27,7 @@ namespace Cinemachine.PostFX
     /// applying them to the current Post-Processing profile, provided that profile has a
     /// DepthOfField effect that is enabled.
     /// </summary>
-    [DocumentationSorting(DocumentationSortingAttribute.Level.UserRef)]
+    [DocumentationSorting(101, DocumentationSortingAttribute.Level.UserRef)]
     [ExecuteInEditMode]
     [AddComponentMenu("")] // Hide in menu
     [SaveDuringPlay]
@@ -69,7 +71,7 @@ namespace Cinemachine.PostFX
         void DestroyProfileCopy()
         {
             if (mProfileCopy != null)
-                RuntimeUtility.DestroyObject(mProfileCopy);
+                DestroyImmediate(mProfileCopy);
             mProfileCopy = null;
         }
 
@@ -93,7 +95,7 @@ namespace Cinemachine.PostFX
                 else
                 {
                     // Handle Follow Focus
-                    if (!m_FocusTracksTarget)
+                    if (!m_FocusTracksTarget || !state.HasLookAt)
                         DestroyProfileCopy();
                     else
                     {
@@ -101,12 +103,8 @@ namespace Cinemachine.PostFX
                             CreateProfileCopy();
                         DepthOfField dof;
                         if (mProfileCopy.TryGetSettings(out dof))
-                        {
-                            float focusDistance = m_FocusOffset;
-                            if (state.HasLookAt)
-                                focusDistance += (state.FinalPosition - state.ReferenceLookAt).magnitude;
-                            dof.focusDistance.value = Mathf.Max(0, focusDistance);
-                        }
+                            dof.focusDistance.value 
+                                = (state.FinalPosition - state.ReferenceLookAt).magnitude + m_FocusOffset;
                     }
 
                     // Apply the post-processing
@@ -119,15 +117,17 @@ namespace Cinemachine.PostFX
         static void OnCameraCut(CinemachineBrain brain)
         {
             // Debug.Log("Camera cut event");
-            PostProcessLayer postFX = GetPPLayer(brain);
-            if (postFX != null)
+            PostProcessLayer postFX = brain.PostProcessingComponent as PostProcessLayer;
+            if (postFX == null)
+                brain.PostProcessingComponent = null;   // object deleted
+            else
                 postFX.ResetHistory();
         }
 
         static void ApplyPostFX(CinemachineBrain brain)
         {
             //UnityEngine.Profiling.Profiler.BeginSample("CinemachinePostProcessing.ApplyPostFX");
-            PostProcessLayer ppLayer = GetPPLayer(brain);
+            PostProcessLayer ppLayer = brain.GetComponent<PostProcessLayer>();
             if (ppLayer == null || !ppLayer.enabled  || ppLayer.volumeLayer == 0)
                 return;
 
@@ -140,8 +140,6 @@ namespace Cinemachine.PostFX
                 volumes[i].sharedProfile = null;
                 volumes[i].profile = null;
             }
-            PostProcessVolume firstVolume = null;
-            int numPPblendables = 0;
             for (int i = 0; i < numBlendables; ++i)
             {
                 var b = state.GetCustomBlendable(i);
@@ -149,19 +147,11 @@ namespace Cinemachine.PostFX
                 if (!(src == null)) // in case it was deleted
                 {
                     PostProcessVolume v = volumes[i];
-                    if (firstVolume == null)
-                        firstVolume = v;
                     v.sharedProfile = src.Profile;
                     v.isGlobal = true;
-                    v.priority = float.MaxValue-(numBlendables-i)-1;
+                    v.priority = float.MaxValue-1;
                     v.weight = b.m_Weight;
-                    ++numPPblendables;
                 }
-#if true // set this to true to force first weight to 1
-                // If more than one volume, then set the frst one's weight to 1
-                if (numPPblendables > 1)
-                    firstVolume.weight = 1;
-#endif
             }
             //UnityEngine.Profiling.Profiler.EndSample();
         }
@@ -214,39 +204,28 @@ namespace Cinemachine.PostFX
             return sVolumes;
         }
 
-        static Dictionary<CinemachineBrain, PostProcessLayer> mBrainToLayer 
-            = new Dictionary<CinemachineBrain, PostProcessLayer>();
-
-        static PostProcessLayer GetPPLayer(CinemachineBrain brain)
+        /// <summary>Internal method called by editor module</summary>
+        [RuntimeInitializeOnLoadMethod]
+        public static void InitializeModule()
         {
-            PostProcessLayer layer = null;
-            if (mBrainToLayer.TryGetValue(brain, out layer))
-            {
-#if UNITY_EDITOR
-                // Maybe they added it since we last checked
-                if (layer != null || Application.isPlaying)
-#endif
-                return layer;
-            }
-            layer = brain.GetComponent<PostProcessLayer>();
-            mBrainToLayer[brain] = layer;
-            if (layer != null)
-                brain.m_CameraCutEvent.AddListener(OnCameraCut);
-            else
-                brain.m_CameraCutEvent.RemoveListener(OnCameraCut);
-            return layer;
+            // When the brain pushes the state to the camera, hook in to the PostFX
+            CinemachineBrain.sPostProcessingHandler.RemoveListener(StaticPostFXHandler);
+            CinemachineBrain.sPostProcessingHandler.AddListener(StaticPostFXHandler);
         }
 
-#if UNITY_EDITOR
-        [UnityEditor.InitializeOnLoad]
-        class EditorInitialize { static EditorInitialize() { InitializeModule(); } }
-#endif
-        [RuntimeInitializeOnLoadMethod]
-        static void InitializeModule()
+        static void StaticPostFXHandler(CinemachineBrain brain)
         {
-            // Afetr the brain pushes the state to the camera, hook in to the PostFX
-            CinemachineCore.CameraUpdatedEvent.RemoveListener(ApplyPostFX);
-            CinemachineCore.CameraUpdatedEvent.AddListener(ApplyPostFX);
+            PostProcessLayer postFX = brain.PostProcessingComponent as PostProcessLayer;
+            if (postFX == null)
+            {
+                brain.PostProcessingComponent = brain.GetComponent<PostProcessLayer>();
+                postFX = brain.PostProcessingComponent as PostProcessLayer;
+                if (postFX != null)
+                        brain.m_CameraCutEvent.AddListener(CinemachinePostProcessing.OnCameraCut);
+            }
+            if (postFX != null)
+                CinemachinePostProcessing.ApplyPostFX(brain);
         }
     }
 }
+#endif
