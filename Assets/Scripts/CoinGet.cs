@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class CoinGet : MonoBehaviour {
 
     Animator anim;
+
+    public UnityEvent collect;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +16,7 @@ public class CoinGet : MonoBehaviour {
     {
         if (collision.name == "Player")
         {
-            anim.SetTrigger("CoinGet");
+            collect.Invoke();
         }
     }
 }
