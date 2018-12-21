@@ -3,10 +3,10 @@ guid: ffb81eccbb81c490abff345352eabfe2
 TextureImporter:
   fileIDToRecycleName:
     21300000: OW_Rock
-    21300002: ow_pipe-vertical-topLeft
+    21300002: OW_Pipe_Vertical01
     21300004: OW_BrickInner
     21300006: OW_BlockHit
-    21300008: ow_pipe-horizontal2
+    21300008: OW_Pipe_H03
     21300010: smb_levels_5
     21300012: smb_levels_6
     21300014: smb_levels_7
@@ -613,17 +613,19 @@ TextureImporter:
     21301216: smb_levels_608
     21301218: smb_levels_609
     21301220: OW_BrickTop
-    21301222: ow_rock
-    21301224: ow_brick-top
-    21301226: ow_brick-inner
-    21301228: ow_stone
-    21301230: smb_levels_0
-    21301232: ow_pipe-vertical-topRight
-    21301234: ow_pipe-vertical-right
-    21301236: ow_pipe-vertical-left
-    21301238: ow_pipe-horizontal-1
-    21301240: ow_pipe-horizontal3
-    21301242: ow_pipe-horizontal4
+    21301222: OW_Rock
+    21301224: OW_Brick-Top
+    21301226: OW_Brick-Inner
+    21301228: OW_Stone
+    21301230: OW_Pipe_Joint01
+    21301232: OW_Pipe_Vertical02
+    21301234: OW_Pipe_Vertical04
+    21301236: OW_Pipe_Vertical03
+    21301238: OW_Pipe_Hl01
+    21301240: OW_Pipe_H02
+    21301242: OW_Pipe_H04
+    21301244: OW_Sky
+    21301246: OW_Pipe_Join02
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -706,7 +708,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ow_rock
+      name: OW_Rock
       rect:
         serializedVersion: 2
         x: 0
@@ -726,7 +728,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_brick-top
+      name: OW_Brick-Top
       rect:
         serializedVersion: 2
         x: 16
@@ -746,7 +748,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_brick-inner
+      name: OW_Brick-Inner
       rect:
         serializedVersion: 2
         x: 32
@@ -766,7 +768,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_stone
+      name: OW_Stone
       rect:
         serializedVersion: 2
         x: 0
@@ -786,27 +788,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb_levels_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f0192ec0310324a41a94aa84b7ad0f53
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ow_pipe-vertical-topLeft
+      name: OW_Pipe_Vertical01
       rect:
         serializedVersion: 2
         x: 0
@@ -826,7 +808,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-vertical-topRight
+      name: OW_Pipe_Vertical02
       rect:
         serializedVersion: 2
         x: 16
@@ -846,7 +828,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-vertical-right
+      name: OW_Pipe_Vertical04
       rect:
         serializedVersion: 2
         x: 16
@@ -866,7 +848,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-vertical-left
+      name: OW_Pipe_Vertical03
       rect:
         serializedVersion: 2
         x: 0
@@ -886,7 +868,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-horizontal-1
+      name: OW_Pipe_Hl01
       rect:
         serializedVersion: 2
         x: 32
@@ -906,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-horizontal3
+      name: OW_Pipe_H02
       rect:
         serializedVersion: 2
         x: 48
@@ -926,7 +908,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-horizontal4
+      name: OW_Pipe_H04
       rect:
         serializedVersion: 2
         x: 48
@@ -946,7 +928,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ow_pipe-horizontal2
+      name: OW_Pipe_H03
       rect:
         serializedVersion: 2
         x: 32
@@ -961,6 +943,66 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fe0e347d2fe634216954d7db6892132a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OW_Sky
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a032d6514de314f2ba5b18a23084f8a4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OW_Pipe_Joint01
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d78a4d22a4eac4a2ca1f5e60120864cf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OW_Pipe_Join02
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9daa84cd65484699b75ec1e1ddef434
       vertices: []
       indices: 
       edges: []
