@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4819618418075104}
   - component: {fileID: 61416828736851904}
   - component: {fileID: 114017575089004162}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: HitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 212975727222002370}
   - component: {fileID: 95540952910598316}
   - component: {fileID: 61202375723087744}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: OW_QuestionBlockCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

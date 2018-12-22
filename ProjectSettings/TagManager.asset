@@ -14,18 +14,13 @@ TagManager:
   - UI
   - 
   - 
-  - Level
-  - Enemy
-  - Usable
-  - Interactable
-  - IgnorePlayer
   - Player
+  - Enemy
+  - Item
+  - Pipe
+  - Ground
+  - Interactable
   - Cameras
-  - LitSprites
-  - Destructable
-  - EnemyWeapon
-  - BossWeakPoint
-  - Bullet
   - 
   - 
   - 
@@ -36,8 +31,13 @@ TagManager:
   - 
   - 
   - 
-  - PlayerDrop
-  - Platform
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
