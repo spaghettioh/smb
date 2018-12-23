@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: f_PlayerJumpForce
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  Value: 6
+  Value: 30
