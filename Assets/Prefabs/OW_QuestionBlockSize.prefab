@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 199813683427320008}
   - component: {fileID: 198109320451368670}
   m_Layer: 16
-  m_Name: CoinEmitter
+  m_Name: ItemEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 95540952910598316}
   - component: {fileID: 61202375723087744}
   m_Layer: 16
-  m_Name: OW_QuestionBlockCoin
+  m_Name: OW_QuestionBlockSize
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1696,7 +1696,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300018, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
+    - sprite: {fileID: 21300002, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
     - sprite: {fileID: 21300020, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
     - sprite: {fileID: 21300022, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
     - sprite: {fileID: 21300024, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
@@ -4938,7 +4938,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300010, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 2904e6eecb48c496e9fa148226c0c042, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
