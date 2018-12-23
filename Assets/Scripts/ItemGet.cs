@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class ItemGet : MonoBehaviour
@@ -11,5 +12,10 @@ public class ItemGet : MonoBehaviour
         {
             collect.Invoke();
         }
+    }
+
+    public void ItemDestroyNow()
+    {
+        Destroy(gameObject);
     }
 }
