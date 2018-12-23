@@ -1,35 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    [Header("Stats")]
     public FloatVariable size;
+    public bool grounded = true;
+    public bool invincible = false;
+    public IntVariable lives;
+    public IntVariable score;
+
+    [Header("Controls")]
     public FloatVariable moveSpeed;
     public FloatVariable jumpForce;
     public Rigidbody2D body;
-    public bool grounded = true;
 
+    [Header("Events")]
+    public GameEvent died;
+    public GameEvent hurt;
+
+    [Header("Debug")]
+    public string message;
     public float inputHorizontal = 0;
     public float moveDirection = 1;
     public float distToGround = 0;
 
-    public string debug;
- 
+
     Animator anim;
 
     // Use this for initialization
     void Start ()
     {
-        size.Value = 0;
-        grounded = true;
+        // Setup the player
         anim = gameObject.GetComponent<Animator>();
+
+        // Reset some variables
+        size.SetValue(0);
+        grounded = true;
     }
 
     // Update is called once per frame
     void FixedUpdate ()
     {
-        // Check for player directional input
+        // Grab directional input
         inputHorizontal = Input.GetAxis("Horizontal");
 
         // Move
@@ -47,6 +62,11 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpForce.Value);
         }
 
+        // Correct size value
+        if (size.Value > 2)
+        {
+            size.SetValue(2);
+        }
     }
 
     public bool IsGrounded()
@@ -101,6 +121,12 @@ public class Player : MonoBehaviour
             inAir = 1;
         }
         anim.SetFloat("InAir", inAir);
+        // ...if you're dead
+        if (size.Value < 0)
+        {
+            anim.SetTrigger("Die");
+            died.Raise();
+        }
     }
 
     //void OnTriggerStay2D(Collision collision)
