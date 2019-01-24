@@ -6,15 +6,15 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
-    public FloatVariable size;
+    public float size;
     public bool grounded = true;
     public bool invincible = false;
     public IntVariable lives;
     public IntVariable score;
 
     [Header("Controls")]
-    public FloatVariable moveSpeed;
-    public FloatVariable jumpForce;
+    public float moveSpeed = 5;
+    public float jumpForce = 5;
     public Rigidbody2D body;
 
     [Header("Events")]
@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     [Header("Debug")]
     public string message;
+    public int livesDebug = 0;
+    public int scoreDebug = 0;
     public float inputHorizontal = 0;
     public float moveDirection = 1;
     public float distToGround = 0;
@@ -37,13 +39,16 @@ public class Player : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
 
         // Reset some variables
-        size.SetValue(0);
+        size = 0;
         grounded = true;
     }
 
     // Update is called once per frame
     void FixedUpdate ()
     {
+        livesDebug = lives.Value;
+        scoreDebug = score.Value;
+
         // Grab directional input
         inputHorizontal = Input.GetAxis("Horizontal");
 
@@ -54,31 +59,22 @@ public class Player : MonoBehaviour
         Animate();
 
         // Check if on a ground
-        IsGrounded();
+        //IsGrounded();
 
         // Jump
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            body.velocity = new Vector2(body.velocity.x, jumpForce.Value);
+            body.AddForce(Vector2.up * jumpForce);
+            grounded = false;
         }
 
+        // SIZE ============
         // Correct size value
-        if (size.Value > 2)
+        if (size > 2)
         {
-            size.SetValue(2);
+            size = 2;
         }
-    }
-
-    public bool IsGrounded()
-    {
-        if (body.velocity.y > 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        // ===============
     }
 
     void Move()
@@ -99,7 +95,7 @@ public class Player : MonoBehaviour
                 moveDirection = 1;
             }
 
-            body.velocity = new Vector2(moveSpeed.Value * moveDirection, body.velocity.y);
+            body.velocity = new Vector2(moveSpeed * moveDirection, body.velocity.y);
             transform.localScale = scale;
         }
     }
@@ -107,7 +103,7 @@ public class Player : MonoBehaviour
     void Animate()
     {
         // ...what size you are
-        anim.SetFloat("Size", size.Value);
+        anim.SetFloat("Size", size);
         // ...how fast you're going
         anim.SetFloat("MoveSpeed", Mathf.Abs(body.velocity.x));
         // ...if you're in the air
@@ -122,21 +118,18 @@ public class Player : MonoBehaviour
         }
         anim.SetFloat("InAir", inAir);
         // ...if you're dead
-        if (size.Value < 0)
+        if (size < 0)
         {
             anim.SetTrigger("Die");
             died.Raise();
         }
     }
 
-    //void OnTriggerStay2D(Collision collision)
-    //{
-    //    foreach (ContactPoint contact in collision.contacts)
-    //    {
-    //        if (contact.thisCollider.isTrigger && collision.gameObject.layer == 12)
-    //        {
-    //            inAir = 0;
-    //        }
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Ground")
+        {
+            grounded = true;
+        }
+    }
 }
