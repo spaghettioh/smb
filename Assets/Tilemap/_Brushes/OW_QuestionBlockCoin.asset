@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
-  m_Name: OW_QuestionBlock
+  m_Name: OW_QuestionBlockCoin
   m_EditorClassIdentifier: 
   m_Prefabs:
   - {fileID: 1915395591725816, guid: bd7fc34fac8fd41f68a1856232e27150, type: 2}
