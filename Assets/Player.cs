@@ -104,8 +104,10 @@ public class Player : MonoBehaviour
     {
         // ...what size you are
         anim.SetFloat("Size", size);
+
         // ...how fast you're going
         anim.SetFloat("MoveSpeed", Mathf.Abs(body.velocity.x));
+
         // ...if you're in the air
         float inAir;
         if (grounded)
@@ -117,6 +119,7 @@ public class Player : MonoBehaviour
             inAir = 1;
         }
         anim.SetFloat("InAir", inAir);
+
         // ...if you're dead
         if (size < 0)
         {
@@ -127,7 +130,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             grounded = true;
         }
