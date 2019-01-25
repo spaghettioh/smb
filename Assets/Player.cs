@@ -6,11 +6,12 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [Header("Stats")]
-    public float size;
+    public FloatVariable size;
     public bool grounded = true;
     public bool invincible = false;
     public IntVariable lives;
     public IntVariable score;
+    public IntVariable coins;
 
     [Header("Controls")]
     public float moveSpeed = 5;
@@ -23,8 +24,6 @@ public class Player : MonoBehaviour
 
     [Header("Debug")]
     public string message;
-    public int livesDebug = 0;
-    public int scoreDebug = 0;
     public float inputHorizontal = 0;
     public float moveDirection = 1;
     public float distToGround = 0;
@@ -39,16 +38,16 @@ public class Player : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
 
         // Reset some variables
-        size = 0;
+        size.SetValue(0);
         grounded = true;
+        score.SetValue(0);
+        lives.SetValue(3);
+        coins.SetValue(0);
     }
 
     // Update is called once per frame
     void FixedUpdate ()
     {
-        livesDebug = lives.Value;
-        scoreDebug = score.Value;
-
         // Grab directional input
         inputHorizontal = Input.GetAxis("Horizontal");
 
@@ -70,9 +69,9 @@ public class Player : MonoBehaviour
 
         // SIZE ============
         // Correct size value
-        if (size > 2)
+        if (size.Value > 2)
         {
-            size = 2;
+            size.SetValue(2);
         }
         // ===============
     }
@@ -103,7 +102,7 @@ public class Player : MonoBehaviour
     void Animate()
     {
         // ...what size you are
-        anim.SetFloat("Size", size);
+        anim.SetFloat("Size", size.Value);
 
         // ...how fast you're going
         anim.SetFloat("MoveSpeed", Mathf.Abs(body.velocity.x));
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour
         anim.SetFloat("InAir", inAir);
 
         // ...if you're dead
-        if (size < 0)
+        if (size.Value < 0)
         {
             anim.SetTrigger("Die");
             died.Raise();

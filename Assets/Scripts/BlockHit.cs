@@ -7,13 +7,11 @@ public class BlockHit : MonoBehaviour
     public bool isQuestionBlock;
     public GameObject label;
     public UnityEvent hit;
+    public FloatVariable playerSize;
 
-    //Animator anim;
-
-	// Use this for initialization
+  	// Use this for initialization
 	void Start ()
     {
-        //anim = gameObject.GetComponent<Animator>();
         Destroy(label);
 	}
 
@@ -21,7 +19,10 @@ public class BlockHit : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            hit.Invoke();
+            if (playerSize.Value > 0 || isQuestionBlock)
+            {
+                hit.Invoke();
+            }
         }
     }
 

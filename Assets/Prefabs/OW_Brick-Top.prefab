@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4282645485465602}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: OW_Brick-Top
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4614737071561032}
   - component: {fileID: 199912427055731706}
   - component: {fileID: 198772151409899356}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: BottomLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4903912484734294}
   - component: {fileID: 199382914220226886}
   - component: {fileID: 198312925009277940}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: TopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4868644394873492}
   - component: {fileID: 61984864407811476}
   - component: {fileID: 114354346238241576}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: HitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4839699590516064}
   - component: {fileID: 199716112485127424}
   - component: {fileID: 198854929163557098}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: BottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4248613611951366}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4906679806007184}
   - component: {fileID: 61635158671813856}
   - component: {fileID: 212162022727415046}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4026727468391050}
   - component: {fileID: 199591647170231428}
   - component: {fileID: 198160434941849392}
-  m_Layer: 16
+  m_Layer: 13
   m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,8 +179,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1079163437859444}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.5, y: 5.5, z: -1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20.5, y: 5.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4868644394873492}
@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isQuestionBlock: 0
+  label: {fileID: 0}
   hit:
     m_PersistentCalls:
       m_Calls:
@@ -365,6 +366,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  playerSize: {fileID: 0}
 --- !u!198 &198160434941849392
 ParticleSystem:
   m_ObjectHideFlags: 1
