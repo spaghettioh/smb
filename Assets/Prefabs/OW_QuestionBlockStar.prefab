@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427fb9289884748269a31fe867de6967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isQuestionBlock: 0
+  isItemBlock: 0
   label: {fileID: 1847360075560736}
   hit:
     m_PersistentCalls:

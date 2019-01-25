@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class BlockHit : MonoBehaviour
 {
-    public bool isQuestionBlock;
+    public bool isItemBlock;
     public GameObject label;
     public UnityEvent hit;
     public FloatVariable playerSize;
@@ -19,7 +19,7 @@ public class BlockHit : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            if (playerSize.Value > 0 || isQuestionBlock)
+            if (playerSize.Value > 0 || isItemBlock)
             {
                 hit.Invoke();
             }

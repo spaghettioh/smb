@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4282645485465602}
+  - component: {fileID: 61747764917529160}
   m_Layer: 16
   m_Name: OW_Brick-Inner
   m_TagString: Untagged
@@ -279,6 +280,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.87405396}
   m_EdgeRadius: 0
+--- !u!61 &61747764917529160
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079163437859444}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!61 &61984864407811476
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -315,7 +341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427fb9289884748269a31fe867de6967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isQuestionBlock: 0
+  isItemBlock: 0
+  label: {fileID: 0}
   hit:
     m_PersistentCalls:
       m_Calls:
@@ -365,6 +392,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  playerSize: {fileID: 11400000, guid: d0090d97fdd34408f82391f9686f58c2, type: 2}
 --- !u!198 &198160434941849392
 ParticleSystem:
   m_ObjectHideFlags: 1
