@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5;
     public float jumpForce = 5;
     public Rigidbody2D body;
+    public TransformVariable CameraFollowTransform;
 
     [Header("Events")]
     public GameEvent died;
@@ -48,6 +49,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        // Update the player position transform variable for the camera
+        CameraFollowTransform.Value = gameObject.transform;
+
         // Grab directional input
         inputHorizontal = Input.GetAxis("Horizontal");
 
