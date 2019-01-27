@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public float jumpForce = 5;
     public Rigidbody2D body;
     public TransformVariable CameraFollowTransform;
+    public Collider2D smallCollider;
+    public Collider2D bigCollider;
 
     [Header("Events")]
     public GameEvent died;
@@ -40,6 +42,8 @@ public class Player : MonoBehaviour
 
         // Reset some variables
         size.SetValue(0);
+        smallCollider.isTrigger = false;
+        bigCollider.isTrigger = true;
         grounded = true;
         score.SetValue(0);
         lives.SetValue(3);
@@ -61,9 +65,6 @@ public class Player : MonoBehaviour
         // Let the animator know what's going on...
         Animate();
 
-        // Check if on a ground
-        //IsGrounded();
-
         // Jump
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -77,6 +78,18 @@ public class Player : MonoBehaviour
         {
             size.SetValue(2);
         }
+        // Adjust colliders based on size
+        if (size.Value > 1)
+        {
+            smallCollider.isTrigger = true;
+            bigCollider.isTrigger = false;
+        }
+        else
+        {
+            smallCollider.isTrigger = false;
+            bigCollider.isTrigger = true;
+        }
+
         // ===============
     }
 

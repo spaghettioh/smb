@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class ItemGet : MonoBehaviour
@@ -8,7 +7,7 @@ public class ItemGet : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Player")
+        if (collision.transform.parent.name == "Player")
         {
             collect.Invoke();
         }

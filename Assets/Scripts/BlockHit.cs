@@ -25,7 +25,7 @@ public class BlockHit : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -1));
 
         // Record the hit
-        if (hit.distance < .5f && hit.collider.name == "Player")
+        if (hit.distance < .55f && hit.collider.transform.parent.name == "Player")
         {
             if (!activated && (playerSize.Value > 0 || isQuestionBlock))
             {

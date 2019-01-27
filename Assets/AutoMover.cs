@@ -23,7 +23,7 @@ public class AutoMover : MonoBehaviour {
         body.velocity = new Vector2(moveDirection * moveSpeed, body.velocity.y);
 
         // Bounce off objects
-        if (turnAround.distance < .7f && turnAround.collider.name != "Player")
+        if (turnAround.distance < .55f && turnAround.collider.name != "Player")
             moveDirection *= -1;
 	}
 }
