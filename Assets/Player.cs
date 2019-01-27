@@ -65,10 +65,10 @@ public class Player : MonoBehaviour
         //IsGrounded();
 
         // Jump
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             body.AddForce(Vector2.up * jumpForce);
-            grounded = false;
+            //grounded = false;
         }
 
         // SIZE ============
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
         // ...if you're in the air
         float inAir;
-        if (grounded)
+        if (IsGrounded())
         {
             inAir = 0;
         }
@@ -131,11 +131,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private bool IsGrounded()
     {
-        if (collision.gameObject.tag == "Ground")
+        RaycastHit2D landed = Physics2D.Raycast(transform.position, new Vector2(0, -1));
+        if (landed.distance < 1f && landed.collider.tag != "Enemy")
         {
-            grounded = true;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
