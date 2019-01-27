@@ -21,10 +21,11 @@ public class BlockHit : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // TODO: Add some logic in here to help with destorying bricks
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -1));
 
         // Record the hit
-        if (hit.distance < .55f && hit.collider.name == "Player")
+        if (hit.distance < .5f && hit.collider.name == "Player")
         {
             if (!activated && (playerSize.Value > 0 || isQuestionBlock))
             {
@@ -39,14 +40,19 @@ public class BlockHit : MonoBehaviour
         }
     }
 
-    public void DestoryThis(GameObject g)
+    public void DestoryThisNow()
     {
-        StartCoroutine(DestroyNow(g));
+        Destroy(gameObject);
     }
 
-    IEnumerator DestroyNow(GameObject g)
+    public void DestoryThisDelayed()
     {
-        yield return new WaitForSeconds(1f);
-        Destroy(g);
+        StartCoroutine(DestroyInSeconds(.6f));
+    }
+
+    IEnumerator DestroyInSeconds(float t)
+    {
+        yield return new WaitForSeconds(t);
+        Destroy(gameObject);
     }
 }
